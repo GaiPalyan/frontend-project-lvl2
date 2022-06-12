@@ -59,7 +59,7 @@ const differ = (filepath1, filepath2) => {
     getFileData(filepath1),
     getFileData(filepath2),
   );
-  return makePlainFormat(tree);
+  return makePlainFormat(tree) + '\n';
 };
 
 export { makeAST, differ };
