@@ -10,7 +10,7 @@ const makePlainFormat = (tree) => {
       case 'modified':
         return [
           identsSizes.standard, `- ${node.key}: ${node.before}`, '\n',
-          identsSizes.standard, `+ ${node.key}: ${node.before}`,
+          identsSizes.standard, `+ ${node.key}: ${node.after}`,
         ].join('');
       case 'unmodified':
         return [identsSizes.big, `${node.key}: ${node.value}`].join('');
