@@ -1,34 +1,65 @@
-import * as _ from "lodash";
-import * as fs from "fs";
-import { resolve } from 'path'
+import * as fs from 'fs';
+import { resolve } from 'path';
+import makePlainFormat from './formatters/plain.js';
 
-const genDiff = (filepath1, filepath2) => {
-    const fileData1 = getFileData(resolve(filepath1));
-    const fileData2 = getFileData(resolve(filepath2));
-    const sortedKeys = Object.keys(Object.assign(fileData1, fileData2)).sort();
+const makeAST = (fileData1, fileData2) => {
+  const sortedKeys = Object.keys({ ...fileData1, ...fileData2 }).sort();
 
-    console.log(_.toLower);
-    //const t = _.toLower(sortedKeys[1]);
+  return sortedKeys.map((key) => {
+    if (!Object.prototype.hasOwnProperty.call(fileData1, key)) {
+      return {
+        key,
+        value: fileData2[key],
+        type: 'added',
+      };
+    }
 
-    const mapped = sortedKeys.map((key) => {
+    if (!Object.prototype.hasOwnProperty.call(fileData2, key)) {
+      return {
+        key,
+        value: fileData1[key],
+        type: 'deleted',
+      };
+    }
 
-    })
-}
+    if (fileData1[key] === fileData2[key]) {
+      return {
+        key,
+        value: fileData1[key],
+        type: 'unmodified',
+      };
+    }
+    return {
+      key,
+      type: 'modified',
+      before: fileData1[key],
+      after: fileData2[key],
+    };
+  });
+};
 
 const readFile = (filepath) => {
-    if (!fs.existsSync(filepath)) {
-        throw new Error('File is not exist!');
-    }
-
-    return fs.readFileSync(filepath, 'utf8');
-}
+  if (!fs.existsSync(filepath)) {
+    throw new Error('File is not exist!');
+  }
+  return fs.readFileSync(filepath, 'utf8');
+};
 
 const getFileData = (filepath) => {
-    try {
-        return JSON.parse(readFile(filepath));
-    } catch (err) {
-        console.log(err.message);
-    }
-}
+  try {
+    return JSON.parse(readFile(resolve(filepath)));
+  } catch (err) {
+    console.log(err.message);
+    return false;
+  }
+};
 
-export default genDiff;
+const differ = (filepath1, filepath2) => {
+  const tree = makeAST(
+    getFileData(filepath1),
+    getFileData(filepath2),
+  );
+  return makePlainFormat(tree);
+};
+
+export { makeAST, differ };
