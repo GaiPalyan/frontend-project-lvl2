@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 import { differ } from '../src/differ.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url)
-console.log(path.dirname(__filename));
 program
   .version('0.0.1')
   .description('Compares two configuration files and shows a difference.\n')
