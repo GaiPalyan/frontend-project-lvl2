@@ -4,11 +4,17 @@
   "description": "[![Actions Status](https://github.com/GaiPalyan/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/GaiPalyan/frontend-project-lvl2/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
+  },
+  "simple-git-hooks": {
+    "pre-push": "make lint"
   },
   "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "repository": {
     "type": "git",
@@ -23,5 +29,12 @@
   "dependencies": {
     "commander": "^9.3.0",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.1",
+    "simple-git-hooks": "^2.8.0"
   }
 }
