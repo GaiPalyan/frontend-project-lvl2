@@ -28,14 +28,15 @@
   "homepage": "https://github.com/GaiPalyan/frontend-project-lvl2#readme",
   "dependencies": {
     "commander": "^9.3.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@jest/globals": "^28.1.1",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-jest": "^26.5.3",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.5.3",
     "jest": "^28.1.1",
     "jest-cli": "^28.1.1",
     "simple-git-hooks": "^2.8.0"
