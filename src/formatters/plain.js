@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const stringifyComplexValue = (value) => {
   if (!_.isObject(value)) {
-    return _.isBoolean(value) || _.isNull(value) ? String(value) : `'${String(value)}'`;
+    return _.isString(value) ? `'${value}'` : `${value}`;
   }
 
   return '[complex value]';

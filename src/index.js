@@ -28,8 +28,7 @@ const differ = (filepath1, filepath2, format) => {
     getFileData(filepath1),
     getFileData(filepath2),
   );
-  const diff = formatterController(tree, format);
-  return `${diff}\n`;
+  return formatterController(tree, format);
 };
 
 export default differ;
