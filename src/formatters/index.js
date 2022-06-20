@@ -7,7 +7,7 @@ const formatterController = (tree, format) => {
     stylish: () => makeStylish(tree),
     plain: () => makePlain(tree),
     json: () => makeJson(tree),
-    default: () => makeStylish(tree),
+    default: () => 'Unknown format',
   };
   return (map[format] || map.default)();
 };
