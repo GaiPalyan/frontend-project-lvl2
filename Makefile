@@ -4,11 +4,14 @@ install: install-deps
 install-deps:
 	npm ci
 
+publish:
+	npm publish --dry-run
+
 test:
 	NODE_OPTIONS=--experimental-vm-modules npx jest
 
 test-coverage:
-	npm test -- --coverage --coverageProvider=v8
+	NODE_OPTIONS=--experimental-vm-modules npx jest --coverage
 
 lint:
 	npx eslint .
