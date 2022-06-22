@@ -6,7 +6,7 @@ import differ from '../src/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getPathToFile = (...path) => join(__dirname, ...path);
+const getPathToFile = (filename) => join(__dirname, '__fixtures__', filename);
 
 const data = [
   {
@@ -47,10 +47,10 @@ const data = [
 ];
 
 describe.each(data)('differ', (diff) => {
-  const expected = readFileSync(getPathToFile('__fixtures__', diff.expected), 'utf8');
+  const expected = readFileSync(getPathToFile(diff.expected), 'utf8');
   const actual = differ(
-    getPathToFile('__fixtures__', diff.file1),
-    getPathToFile('__fixtures__', diff.file2),
+    getPathToFile(diff.file1),
+    getPathToFile(diff.file2),
     diff.format,
   );
   test(`.${diff.extension} files compare -f ${diff.format} output format test`, () => {
