@@ -4,7 +4,7 @@ import _ from 'lodash';
 Before compare two nested files let's make abstract tree and implement params for single node
 */
 const treeBuilder = (fileData1, fileData2) => {
-  const sortedKeys = Object.keys({ ...fileData1, ...fileData2 }).sort();
+  const sortedKeys = _.sortBy(Object.keys({ ...fileData1, ...fileData2 }));
 
   return sortedKeys.map((key) => {
     if (_.isObject(fileData1[key]) && _.isObject(fileData2[key])) {
